@@ -53,6 +53,11 @@
         <?php
         if ($mixeval['Mixeval']['peer_question'] > 0 ) {
             foreach($groupMembers as $row): $user = $row['User']; ?>
+                <center><?php if($user['picture']){ ?>
+                    <img src="<?php echo $user['picture']; ?>" width="70px;">
+                <?php }else{ ?>
+                    <img src="/img/profiles/blank.png" width="70px;">
+                <?php } ?></center>
                 <center><h2><?php echo $user['full_name']?></h2></center>
                 <?php
                 $params = array('controller'            => 'mixevals',

@@ -1,3 +1,9 @@
+<?php if($data['User']['picture']){ ?>
+  <img src="<?php echo $data['User']['picture']; ?>" width="200px;">
+<?php }else{ ?>
+  <img src="/img/profiles/blank.png" width="200px;">
+<?php } ?>
+
 <h2>User Information</h2>
 <?php 
 $sysParams = ClassRegistry::init('sys_parameters')->find('first', array('conditions' => array('parameter_code' => 'system.student_number')));
@@ -5,7 +11,7 @@ echo $this->Form->create('User', array('type'=>'file', 'id' => 'EditProfile', 'u
 echo $this->Form->input('username', array('id' => 'username', 'size'=>'50', 'readonly' => true, 'label' => __('Username', true)));
 echo $this->Form->input('first_name', array('size'=>'50', 'label' => __('First Name', true)));
 echo $this->Form->input('last_name', array('size'=>'50', 'label' => __('Last Name', true)));
-echo $this->Form->input('picture', array('type'=>'file', 'label' => __('Picture', true)));
+echo $this->Form->input('picture', array('type'=>'file', 'required'=>false, 'label' => __('Picture', true)));
 echo $this->Form->input('email', array('size'=>'50', 'after' => '', 'label' => __('Email', true)));
 if ($is_student) {
 // student number
@@ -21,7 +27,6 @@ echo $this->Form->input('old_password', array('type'=>'password', 'size'=>'50', 
 echo $this->Form->input('temp_password', array('type'=>'password', 'size'=>'50', 'label'=>__('New Password', true), 'disabled'=>$viewPage));
 echo $this->Form->input('confirm_password', array('type'=>'password', 'size'=>'50', 'label'=>__('Confirm New Password', true), 'disabled'=>$viewPage));
 ?>
-
 
 <div class="oauth">
 <?php if (User::hasPermission('controllers/Oauthclients')): ?>

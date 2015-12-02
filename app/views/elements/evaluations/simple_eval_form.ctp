@@ -192,7 +192,13 @@
     </tr>
 <?php foreach ($groupMembers as $row): $user = $row['User'];?>
     <tr>
-        <td><?php echo $user['first_name'].' '.$user['last_name']?>
+        <td>
+            <?php if($user['picture']){ ?>
+                <img src="<?php echo $user['picture']; ?>" width="70px;">
+            <?php }else{ ?>
+                <img src="/img/profiles/blank.png" width="70px;">
+            <?php } ?>
+            <?php echo $user['first_name'].' '.$user['last_name']?>
       <input type="hidden" name="memberIDs[]" value="<?php echo $user['id']?>"/></td>
       <td width="110">
         <table><tr>

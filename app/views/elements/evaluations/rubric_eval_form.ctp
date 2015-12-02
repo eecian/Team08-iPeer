@@ -106,6 +106,11 @@ function saveButtonVal(userId) {
                 <?php endif; ?>
                 </div>
                 <div style="height: 200px;" id="panel1Content" class="panelContent">
+                    <?php if($user['picture']){ ?>
+                        <img src="<?php echo $user['picture']; ?>" width="70px;">
+                    <?php }else{ ?>
+                        <img src="/img/profiles/blank.png" width="70px;">
+                    <?php } ?>
                     <br>
                     <?php
                     $params = array('controller'=>'rubrics', $viewData , 'evaluate'=>1, 'user'=>$user, 'event'=>$event);
