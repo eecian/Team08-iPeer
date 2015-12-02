@@ -1,4 +1,6 @@
 <div id='StudentHome'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
 <?php
 function getUpcomingTableArray($html, $events) {
     $ret = array();
@@ -33,6 +35,7 @@ function getUpcomingTableArray($html, $events) {
 }
 
 $evalUpcoming = getUpcomingTableArray($html, $evals['upcoming']);
+$evalRevupcoming = getUpcomingTableArray($html, $evals['revupcoming']);
 $surveyUpcoming = getUpcomingTableArray($html, $surveys['upcoming']);
 
 function getNonUpcomingTableArray($html, $events) {
@@ -112,23 +115,43 @@ else {
 <h2>Peer Evaluations</h2>
 <h3>Due</h3>
 <table class='standardtable'>
+    <thead>
     <tr>
        <th>Event</th>
        <th>Group</th>
        <th>Course</th>
        <th>Due Date</th>
        <th>Due In/<span class='red'>Late By</span></th>
+      <button onclick="myFunction()">Sort by newest/oldest</button>
     </tr>
+    </thead>
+    <tbody>
     <?php
     echo $html->tableCells($evalUpcoming);
     ?>
     <?php if (empty($evalUpcoming)):?>
     <tr><td colspan="5" align="center"><b> No peer evaluations due at this time </b></td></tr>
     <?php endif; ?>
+    </tbody>
+    <script>
+        function myFunction(){
+            var table = document.getElementsByTagName('tbody');
+
+            for (var i = 0; i < table.length; i++) {
+                var rows = table[i].rows;
+                for (var j = 0; j < rows.length; j++) {
+                        rows[j].parentNode.insertBefore(rows[rows.length-1], rows[j]);
+                }
+            }
+
+            }
+
+        </script>
 </table>
 
 <h3>Submitted</h3>
 <table class='standardtable'>
+    <thead>
     <tr>
         <th>Event</th>
         <th>Result <span class='orangered'>Available</span>/End</th>
@@ -137,17 +160,21 @@ else {
         <th>Due Date</th>
         <th>Date Submitted</th>
     </tr>
+    </thead>
+    <tbody>
 <?php echo $html->tableCells($evalSubmitted); ?>
 <?php if (empty($evalSubmitted)):?>
     <tr>
         <td colspan="6" align="center">No submitted evaluations available.</td>
     </tr>
 <?php endif; ?>
+</tbody>
 </table>
 
 <?php if (!empty($evalExpired)):?>
 <h3>Expired With No Submission</h3>
 <table class='standardtable'>
+    <thead>
     <tr>
         <th>Event</th>
         <th>Result <span class='orangered'>Available</span>/End</th>
@@ -155,53 +182,68 @@ else {
         <th>Course</th>
         <th>Due Date</th>
     </tr>
+    </thead>
+    <tbody>
 <?php echo $html->tableCells($evalExpired); ?>
+    </tbody>
 </table>
 <?php endif; ?>
 
 <h2>Surveys</h2>
 <h3>Due</h3>
 <table class='standardtable'>
+    <thead>
     <tr>
        <th>Event</th>
        <th>Course</th>
        <th>Due Date</th>
        <th>Due In/<span class='red'>Late By</span></th>
     </tr>
+    </thead>
+    <tbody>
     <?php
     echo $html->tableCells($surveyUpcoming);
     ?>
     <?php if (empty($surveyUpcoming)):?>
     <tr><td colspan="4" align="center"><b> No survey due at this time </b></td></tr>
     <?php endif; ?>
+    </tbody>
 </table>
 
 <h3>Submitted</h3>
 <table class='standardtable'>
+    <thead>
     <tr>
         <th>Event</th>
         <th>Course</th>
         <th>Due Date</th>
         <th>Date Submitted</th>
     </tr>
+    </thead>
+    <tbody>
 <?php echo $html->tableCells($surveySubmitted); ?>
 <?php if (empty($surveySubmitted)):?>
     <tr>
         <td colspan="4" align="center">No submitted surveys available.</td>
     </tr>
 <?php endif; ?>
+   </tbody>
 </table>
 
 <?php if (!empty($surveyExpired)):?>
 <h3>Expired With No Submission</h3>
 <table class='standardtable'>
+    <thead>
     <tr>
         <th>Event</th>
         <th>Course</th>
         <th>Due Date</th>
     </tr>
+    </thead>
+    <tbody>
 <?php echo $html->tableCells($surveyExpired); ?>
 </table>
 <?php endif; ?>
+</tbody>
 
 </div>
