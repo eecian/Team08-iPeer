@@ -164,6 +164,10 @@ class User extends AppModel
             'rule' => array('minLength', 6),
             'message' => 'Passwords must have a minimum of 6 characters.'
         ),
+        'picture' => array(
+            'rule' => array('extension', array('jpeg', 'png', 'jpg')),
+            'message' => 'Please supply a valid image.'
+        ),
     );
 
 

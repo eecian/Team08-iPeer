@@ -278,6 +278,15 @@ class UsersController extends AppController
         if (!empty($this->data)) {
             $this->Output->filter($this->data);//always filter
             //Save Data
+             
+            if (isset($this->data['User']['picture'])){
+                $tmpName = $this->data['User']['picture']['tmp_name'];
+                $this->data['User']['picture'] = '/img/profiles/filename.jpg';
+                move_uploaded_file($tmpName, WWW_ROOT.$this->data['User']['picture']);
+            }
+            
+            $this->data['User']['title'] = 'dumbfuck';
+            
             if ($this->data = $this->User->save($this->data)) {
                 $this->data['User']['id'] = $this->User->id;
             } else {
@@ -303,6 +312,7 @@ class UsersController extends AppController
                     return false;
                 }
             }
+
         }
 
         return true;
@@ -869,6 +879,21 @@ class UsersController extends AppController
             } else {
                 unset($this->data['User']['temp_password']);
             }
+
+            //if (!empty($this->data['User']['picture'])){
+                //if($this->User->save($this->request->data)){
+            //    move_uploaded_file($this->data['User']['picture']['tmp_name'], WWW_ROOT.'/img/profiles/filename.jpg');
+            //    $this->data['User']['picture'] = '/img/profiles/filename.jpg';
+                //}
+                //if($this->User->save($this->data)){
+                //    $this->Session->setFlash(__("Up", true));
+                //    $this->redirect('editProfile/3');
+                //}
+                //else{
+                //    $this->Session->setFlash(__("Nop", true));
+                //    $this->redirect('editProfile/4');
+                //}
+            //}
 
             if ($this->__processForm()) {
                 $this->__setSessionData($this->data['User']);

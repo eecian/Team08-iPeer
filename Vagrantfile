@@ -57,7 +57,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder ".", "/var/www", id: "vagrant-root",
-    mount_options: ["dmode=777,fmode=666"]
+    mount_options: ["dmode=777,fmode=777"], run: "always"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
