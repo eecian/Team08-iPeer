@@ -1,0 +1,22 @@
+We wanted to improve the user experience of iPeer by giving users the option to sort evaluations by date as well as upload profile pictures for recognizability purposes.
+
+Implementation 1: Ability to sort evaluations by date
+Files:
+ * app/controllers/home_controller.php,
+ * app/views/home/student_index.ctp
+
+Implementation 2: Ability to add profile pictures to student accounts
+Files: 
+ * Vagrantfile
+ * app/config/schema/schema.php
+ * app/controllers/users_controller.php
+ * app/models/user.php
+ * app/views/users/edit_profile.ctp
+ * app/views/elements/evaluations/mixeval_eval_form.ctp
+ * app/views/elements/evaluations/rubric_eval_form.ctp
+ * app/views/elements/evaluations/simple_eval_form.ctp
+ * app/views/users/edit_profile.ctp
+ * app/views/users/view.ctp
+ * app/webroot/img/profiles/.gitignore
+ * app/webroot/img/profiles/blank.png
+
